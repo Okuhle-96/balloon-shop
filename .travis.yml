@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - 12
+
+env:
+  - DATABASE_URL=postgresql://postgres@localhost:5432/my_balloon_tests
+
+before_script:
+  - psql -c 'create database  my_balloon_tests;' -U postgres
+  - psql -U postgres -d my_balloon_tests -a -f sql/the-balloon.sql
+
+services:
+  - postgresql
